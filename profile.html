@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Aplikasidan informasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #a614d7, #15238c);
+    overflow-x: hidden;
+}
+
+
+        .profile-container {
+            width: 90%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: slideInFromTop 0.6s ease-out;
+        }
+
+        .app-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .app-logo:hover {
+            transform: scale(1.2);
+        }
+
+        .app-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4e73df;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .app-name:hover {
+            color: #2e59a7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 700px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            animation: zoomIn 0.5s ease-out;
+        }
+
+        .modal-header {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2575fc;
+        }
+
+        .modal-body {
+            font-size: 18px;
+            color: #555;
+            margin: 25px 0;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 12px 26px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close {
+            background: #ff5e5e;
+            color: white;
+        }
+
+        .btn-close:hover {
+            background: #ff3232;
+        }
+
+        .btn-next {
+            background: #2575fc;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: #6a11cb;
+        }
+
+        .btn-prev {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-prev:hover {
+            background: #bbb;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .cta-button {
+                font-size: 16px;
+                padding: 12px 28px;
+            }
+
+            .modal-header {
+                font-size: 24px;
+            }
+
+            .modal-body {
+                font-size: 16px;
+            }
+
+            .app-name {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">>
+        <div class="app-header">
+            <img src="freepik__jet_fighter.png" alt="App Logo" class="app-logo">
+            <h1 class="app-name">Ega Kukus</h1>
+        </div>
+
+        <p>Aplikasi inovatif yang mempermudah pengelolaan transaksi Anda secara online dengan tampilan interaktif dan aman.</p>
+        <a href="#" class="cta-button" id="btnLearnMore">Pelajari Selengkapnya</a>
+        <a href="index.html" class="cta-button" id="btnTransaksi">branda</a>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">Langkah 1: Tentang Aplikasi</div>
+            <div class="modal-body" id="modalBody">
+                Aplikasi ini membantu Anda mengelola transaksi dengan cepat dan mudah, didukung oleh fitur-fitur canggih dan antarmuka yang ramah pengguna.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-prev" id="btnPrev" style="display: none;">Sebelumnya</button>
+                <button class="btn btn-next" id="btnNext">Berikutnya</button>
+                <button class="btn btn-close" id="btnClose">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const btnLearnMore = document.getElementById('btnLearnMore');
+        const btnClose = document.getElementById('btnClose');
+        const btnNext = document.getElementById('btnNext');
+        const btnPrev = document.getElementById('btnPrev');
+        const modalHeader = document.getElementById('modalHeader');
+        const modalBody = document.getElementById('modalBody');
+
+        const steps = [
+            {
+                title: "Langkah 1: Tentang Aplikasi",
+                content: "Aplikasi ini adalah solusi modern untuk mengelola transaksi secara online dengan fitur canggih yang mempermudah proses bisnis."
+            },
+            {
+                title: "Langkah 2: Fitur Utama",
+                content: "Fitur utama aplikasi meliputi: dashboard interaktif, analitik transaksi, dan integrasi dengan berbagai metode pembayaran."
+            },
+            {
+                title: "Langkah 3: Keunggulan",
+                content: "Aplikasi ini menawarkan kemudahan penggunaan, tingkat keamanan tinggi, dan dukungan penuh untuk pengguna di berbagai perangkat."
+            }
+        ];
+
+        let currentStep = 0;
+
+        btnLearnMore.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            updateStep();
+        });
+
+        btnClose.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        function updateStep() {
+            modalHeader.textContent = steps[currentStep].title;
+            modalBody.textContent = steps[currentStep].content;
+
+            btnPrev.style.display = currentStep > 0 ? "inline-block" : "none";
+            btnNext.style.display = currentStep < steps.length - 1 ? "inline-block" : "none";
+        }
+
+        btnNext.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateStep();
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStep();
+            }
+        });
+        window.addEventListener('load', () => {
+            document.body.style.transform = "translateY(0)";
+        });
+        document.getElementById('btnbranda').addEventListener('click', (event) => {
+        const userConfirmed = confirm('Apakah Anda ingin menuju halaman branda?');
+        if (!userConfirmed) {
+            event.preventDefault();
+        }
+        });
+    </script>
+</body>
+</html>

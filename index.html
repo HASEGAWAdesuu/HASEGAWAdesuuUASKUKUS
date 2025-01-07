@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Belanja Online Mudah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #15238c;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: #6a11cb;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero a {
+            padding: 14px 28px;
+            background: white;
+            color: #2575fc;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .hero a:hover {
+            background: #2575fc;
+            color: white;
+        }
+
+        /* Product Section */
+        .products {
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-item p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .product-item .price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-item a {
+            padding: 10px 20px;
+            background: #2575fc;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .product-item a:hover {
+            background: #6a11cb;
+        }
+
+        footer {
+            background: #15238c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #6a11cb;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">EGAKUKUS</div>
+        <nav>
+            <a href="transaksi.html">Produk</a>
+            <a href="info.html">informasi</a>
+            <a href="profile.html">tentang Kami</a>
+
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Belanja Mudah di EGA KUKUS</h1>
+        <p>Temukan produk favorit Anda dengan harga terbaik, hanya di EGAKUKUS!</p>
+        <a href="#products">Jelajahi Produk</a>
+    </section>
+
+    <section class="products" id="products">
+        <h2>Produk Terpopuler</h2>
+        <section class="product-grid">
+            <div class="product-item">
+                <img src="image.png" alt="Produk 1">
+                <h3>Pesawat B-2 Spiri</h3>
+                <p>adalah pesawat perang berteknologi siluman yang digunakan untuk pengemboman.</p>
+                <div class="price">Rp 29.000.000.000</div>
+                <a href="transaksi.html">Beli Sekarang</a>
+            </div>
+            <div class="product-item">
+                <img src="image copy 2.png" alt="Produk 2">
+                <h3>Lockheed F-117A Nighthawk</h3>
+                <p>F-16 Fighting Falcon adalah pesawat tempur multiperan yang ringkas.</p>
+                <div class="price">1.037.043.520.000</div>
+                <a href="transaksi.html">Beli Sekarang</a>
+            </div>
+    </section>
+
+    <footer>
+        <p>© 2025 EGAKUKUS. <a href="#contact">Hubungi Kami</a></p>
+    </footer>
+</body>
+</html>

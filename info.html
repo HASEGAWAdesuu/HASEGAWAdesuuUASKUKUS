@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Penggunaan Aplikasi Penjualan Barang Kukus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e3ffe7, #d9e7ff);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #007BFF;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #d9e7ff, #cfe2ff);
+        }
+
+        .step .material-icons {
+            font-size: 48px;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleUp 0.3s ease-in-out;
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:hover {
+            background: #0056b3;
+        }
+
+        .step:focus {
+            outline: 2px solid #007BFF;
+        }
+
+        .ega-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .ega-info h3 {
+            font-size: 1.5rem;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .ega-info p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .ega-info button {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .ega-info button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cara Penggunaan Aplikasi Penjualan Barang Kukus</h1>
+        </div>
+        <div class="steps">
+            <section class="step" onclick="openModal(1)" role="button" tabindex="0">
+                <span class="material-icons">person_add</span>
+                <h3>Langkah 1: Daftar</h3>
+                <p>Buat akun Anda dengan mudah menggunakan email atau nomor telepon.</p>
+            </section>
+            <section class="step" onclick="openModal(2)" role="button" tabindex="0">
+                <span class="material-icons">login</span>
+                <h3>Langkah 2: Login</h3>
+                <p>Masuk ke aplikasi untuk mengelola penjualan Anda.</p>
+            </section>
+            <section class="step" onclick="openModal(3)" role="button" tabindex="0">
+                <span class="material-icons">add_shopping_cart</span>
+                <h3>Langkah 3: Tambah Produk</h3>
+                <p>Tambahkan produk yang ingin Anda jual dengan detail yang lengkap.</p>
+            </section>
+            <section class="step" onclick="openModal(4)" role="button" tabindex="0">
+                <span class="material-icons">assignment</span>
+                <h3>Langkah 4: Kelola Pesanan</h3>
+                <p>Pantau pesanan pelanggan Anda dengan mudah.</p>
+            </section>
+        </div>
+
+        <!-- Ega Kukus Info -->
+        <div class="ega-info">
+            <h3>Info Ega Kukus - Penjual Pesawat Tempur</h3>
+            <p>Ega Kukus adalah penjual pesawat tempur terbaik yang menawarkan berbagai jenis pesawat tempur canggih untuk kolektor dan penggemar pesawat. Kami menyediakan pilihan pesawat tempur yang dilengkapi dengan spesifikasi terbaik dan harga yang kompetitif. Anda dapat memilih dari berbagai model pesawat tempur dengan kualitas terjamin.</p>
+            <button onclick="goHome()">Ke Beranda</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <h2 id="modalTitle">Judul Modal</h2>
+            <p id="modalDescription">Deskripsi langkah akan muncul di sini.</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+
+        function openModal(step) {
+            const stepsData = {
+                1: {
+                    title: 'Langkah 1: Daftar',
+                    description: 'Masukkan informasi Anda seperti nama, email, dan kata sandi untuk membuat akun baru.'
+                },
+                2: {
+                    title: 'Langkah 2: Login',
+                    description: 'Gunakan email dan kata sandi yang telah didaftarkan untuk masuk ke akun Anda.'
+                },
+                3: {
+                    title: 'Langkah 3: Tambah Produk',
+                    description: 'Isi detail produk seperti nama, harga, deskripsi, dan unggah gambar untuk menarik pembeli.'
+                },
+                4: {
+                    title: 'Langkah 4: Kelola Pesanan',
+                    description: 'Pantau status pesanan pelanggan, proses pengiriman, dan update stok produk.'
+                }
+            };
+
+            modalTitle.textContent = stepsData[step].title;
+            modalDescription.textContent = stepsData[step].description;
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function goHome() {
+            window.location.href = 'branda_egakukus.html';
+        }
+    </script>
+</body>
+
+</html>

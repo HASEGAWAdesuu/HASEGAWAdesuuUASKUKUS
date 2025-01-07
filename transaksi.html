@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi Barang KUKUS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #3f82bd;
+        }
+        header {
+            background-color: #38add8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+        }
+        .navbar ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            text-align: center;
+        }
+        .navbar ul li {
+            display: inline;
+            margin: 10px;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .navbar ul li a:hover {
+            background-color: #34495e;
+        }
+        .navbar ul li button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+        .navbar ul li button:hover {
+            background-color: #c0392b;
+        }
+        .etalase {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .product h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .product .price {
+            font-size: 18px;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+        .product button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .product button:hover {
+            background-color: #2980b9;
+        }
+        .rekapan {
+            display: none;
+            margin: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ecf0f1;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        #login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #login-modal div {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #login-modal h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #login-modal input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #login-modal button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0c52cc;
+            color: rgb(239, 233, 233);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        #login-modal button:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>Transaksi Barang KUKUS</header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="#rekapan" onclick="toggleRekapan()">Transaksi</a></li>
+            <li><button id="logout-btn" onclick="logout()" style="display: none;">Logout</button></li>
+            <li><button id="login-btn" onclick="openLoginModal()" style="display: inline-block;">Login</button></li>
+        </ul>
+    </nav>
+
+    <div id="login-modal" class="login-modal">
+        <div class="login-form">
+            <span class="close-btn" onclick="closeLoginModal()">&#10005;</span>
+            <h3>Login</h3>
+            <input type="text" id="username" placeholder="Nama Pengguna">
+            <input type="password" id="password" placeholder="Kata Sandi">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="etalase">
+            <div class="product" id="product-1">
+                <img src="image.png" alt="Pesawat B-2 Spirit">
+                <h2>Pesawat B-2 Spirit</h2>
+                <p>adalah pesawat perang berteknologi siluman yang digunakan untuk pengemboman.</p>
+                <p class="price">Rp 29.000.000.000</p>
+                <p id="stock-1">Stok: 999</p>
+                <button id="buy-btn-1" onclick="addToTransaction(1, 'image.png')">Beli Sekarang</button>
+            </div>
+            <div class="product" id="product-2">
+                <img src="image copy.png" alt="F-16 Fighting Falcon">
+                <h2> Pesawat F-16 C/D</h2>
+                <p>F-16 Fighting Falcon adalah pesawat tempur multiperan yang ringkas.</p>
+                <p class="price">Rp 1.037.043.520.000</p>
+                <p id="stock-2">Stok: 999</p>
+                <button id="buy-btn-2" onclick="addToTransaction(2, 'image copy.png')">Beli Sekarang</button>
+            </div>
+            <div class="product" id="product-3">
+                <img src="image copy 2.png" alt="Lockheed F-117A Nighthawk">
+                <h2>Lockheed F-117A Nighthawk</h2>
+                <p>Lockheed F-117A Nighthawk adalah pesawat tempur siluman yang dikembangkan oleh Lockheed Martin.</p>
+                <p class="price">Rp 19.442.045.640.000</p>
+                <p id="stock-3">Stok: 999</p>
+                <button id="buy-btn-3" onclick="addToTransaction(3, 'image copy 2.png')">Beli Sekarang</button>
+            </div>    
+            <div class="product" id="product-4">
+                <img src="image copy 3.png" alt="J-35A">
+                <h2>J-35A</h2>
+                <p>Shenyang J-35 adalah serangkaian pesawat tempur multirole stealth bermesin ganda, serbaguna.</p>
+                <p class="price">Rp 1.131.340.000.000</p>
+                <p id="stock-4">Stok: 999</p>
+                <button id="buy-btn-4" onclick="addToTransaction(4, 'image copy 3.png')">Beli Sekarang</button>
+            </div>
+            <div class="product" id="product-5">
+                <img src="image copy 4.png" alt="F-35 Lightning II">
+                <h2>F-35 Lightning II</h2>
+                <p>Shenyang J-35 adalah serangkaian pesawat tempur multirole stealth bermesin ganda, serbaguna.</p>
+                <p class="price">Rp 2.194.799.600.000</p>
+                <p id="stock-5">Stok: 999</p>
+                <button id="buy-btn-5" onclick="addToTransaction(5, 'image copy 4.png')">Beli Sekarang</button>
+            </div>
+            <div class="product" id="product-6">
+                <img src="image copy 5.png" alt="J-35A">
+                <h2>Eurofighter Typhoon</h2>
+                <p>The Eurofighter Typhoon is a European multinational twin-engine, supersonic, canard delta wing.</p>
+                <p class="price">Rp2.004.088.000.000</p>
+                <p id="stock-6">Stok: 999</p>
+                <button id="buy-btn-6" onclick="addToTransaction(6, 'image copy 5.png')">Beli Sekarang</button>
+            </div>
+        </div>
+
+        <div id="rekapan" class="rekapan">
+            <h2>Rekapan Transaksi</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        <th>Total</th>
+                        <th>Gambar</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-table">
+                </tbody>
+            </table>
+            <h3>Total Transaksi: Rp <span id="total-price">0</span></h3>
+            <button id="struk-btn" onclick="generateStruk()" style="display: none;">Cetak Struk</button>
+        </div>
+    </main>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Pesawat B-2 Spirit", price:29000000000000, stock: 999, image: 'image.png' },
+            { id: 2, name: "F-16 Fighting Falcon", price: 1037043520000, stock: 999, image: 'image copy.png' },
+            { id: 3, name: "Lockheed F-117A Nighthawk", price:19442045640000 , stock: 999, image: 'image copy 2.png' },
+            { id: 4, name: "J-35A", price: 1131340000000, stock: 999, image: 'image copy 3.png' },
+            { id: 5, name: "F-35 Lightning II", price:2194799600000, stock: 999, image: 'image copy 4.png' },
+            { id: 6, name: "Eurofighter Typhoon", price:2004088000000, stock: 999, image: 'image copy 5.png' },
+        
+        ]
+        let transactions = [];
+        let isLoggedIn = false;
+
+        function openLoginModal() {
+            document.getElementById("login-modal").style.display = "flex";
+        }
+
+        function closeLoginModal() {
+            document.getElementById("login-modal").style.display = "none";
+        }
+
+        function login() {
+            isLoggedIn = true;
+            document.getElementById("login-btn").style.display = "none";
+            document.getElementById("logout-btn").style.display = "inline-block";
+            closeLoginModal();
+            showNotification("Anda berhasil login!");
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById("logout-btn").style.display = "none";
+            document.getElementById("login-btn").style.display = "inline-block";
+            showNotification("Anda berhasil logout!");
+        }
+
+        function addToTransaction(id, image) {
+            if (!isLoggedIn) {
+                showNotification("Anda harus login terlebih dahulu untuk membeli barang!");
+                return;
+            }
+
+            const product = products.find(p => p.id === id);
+            if (product && product.stock > 0) {
+                product.stock--;
+                let existingTransaction = transactions.find(t => t.name === product.name);
+                if (existingTransaction) {
+                    existingTransaction.quantity++;
+                    existingTransaction.total = existingTransaction.quantity * product.price;
+                } else {
+                    transactions.push({ id: id, name: product.name, price: product.price, quantity: 1, total: product.price, image: image });
+                }
+                updateTransactionTable();
+                updateStockDisplay(id, product.stock);
+                showNotification("Produk berhasil ditambahkan!");
+            } else {
+                showNotification("Stok tidak cukup!");
+            }
+        }
+
+        function updateTransactionTable() {
+            const table = document.getElementById("transaction-table");
+            table.innerHTML = "";
+            let totalPrice = 0;
+            transactions.forEach((transaction, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${transaction.name}</td>
+                    <td>Rp ${transaction.price.toLocaleString()}</td>
+                    <td>
+                        <button onclick="updateQuantity(${index}, -1)">-</button>
+                        ${transaction.quantity}
+                        <button onclick="updateQuantity(${index}, 1)">+</button>
+                    </td>
+                    <td>Rp ${transaction.total.toLocaleString()}</td>
+                    <td><img src="${transaction.image}" alt="${transaction.name}" style="width: 50px; height: 50px;"></td>
+                    <td><button onclick="removeTransaction(${index})">Hapus</button></td>
+                `;
+                table.appendChild(row);
+                totalPrice += transaction.total;
+            });
+            document.getElementById("total-price").textContent = totalPrice.toLocaleString();
+            document.getElementById("struk-btn").style.display = transactions.length > 0 ? "inline-block" : "none";
+        }
+
+        function updateQuantity(index, change) {
+            const transaction = transactions[index];
+            if (transaction.quantity + change > 0) {
+                transaction.quantity += change;
+                transaction.total = transaction.quantity * transaction.price;
+                updateTransactionTable();
+            }
+        }
+
+        function removeTransaction(index) {
+            transactions.splice(index, 1);
+            updateTransactionTable();
+        }
+
+        function updateStockDisplay(id, stock) {
+            document.getElementById(`stock-${id}`).textContent = `Stok: ${stock}`;
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 3000);
+        }
+
+        function toggleRekapan() {
+            const rekapan = document.getElementById("rekapan");
+            rekapan.style.display = rekapan.style.display === "none" ? "block" : "none";
+        }
+
+        function generateStruk() {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleString();
+
+            const shippingDate = new Date();
+            shippingDate.setDate(shippingDate.getDate() + 3); 
+            const formattedShippingDate = shippingDate.toLocaleDateString();
+
+            let strukHtml = `<h3>Struk Pembelian - ${formattedDate}</h3>`;
+            transactions.forEach((transaction) => {
+                strukHtml += `
+                    <p><img src="${transaction.image}" alt="${transaction.name}" style="width: 50px; height: 50px;">
+                    ${transaction.name} x${transaction.quantity} - Rp ${transaction.total.toLocaleString()}</p>
+                `;
+            });
+            strukHtml += `<p>Total: Rp ${document.getElementById("total-price").textContent}</p>`;
+            strukHtml += `<p>Perkiraan Pengiriman: ${formattedShippingDate}</p>`;
+
+            const strukPopup = window.open('', '', 'width=600,height=400');
+            strukPopup.document.write(strukHtml);
+        }
+    </script>
+</body>
+</html>
